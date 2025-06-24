@@ -33,7 +33,7 @@ export default function PoolCalculator() {
     } else if (sampleMl === 100) {
       return tabletsCount * 20 - 10;
     } else {
-      throw new Error('Debes elegir  si tu muestra es 50ml o 100 ml');
+      throw new Error('Debes elegir si tu muestra es 50ml o 100 ml');
     }
   };
 
@@ -76,7 +76,11 @@ export default function PoolCalculator() {
         alkaPlusKilos,
       });
     } catch (error) {
-      Alert.alert('Error', 'Algo ha fallado...:(');
+      if (Platform.OS === 'web') {
+        alert('Algo ha fallado...:(');
+      } else {
+        Alert.alert('Error', 'Algo ha fallado...:(');
+      }
     }
   };
 
@@ -118,7 +122,7 @@ export default function PoolCalculator() {
 
           {/* Input Section */}
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>Resultados:</Text>
+            <Text style={styles.cardTitle}>Datos de entrada:</Text>
             
             {/* Tablets Input */}
             <View style={styles.inputGroup}>

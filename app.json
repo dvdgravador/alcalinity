@@ -8,6 +8,11 @@
     "scheme": "calculadora-alcalinidad",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1e40af"
+    },
     "android": {
       "package": "com.davidcarrillo.calculadoraalcalinidad",
       "versionCode": 1,
