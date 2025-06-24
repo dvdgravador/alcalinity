@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Alcalinidad - Fontanería Gavilán</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Calculadora de alcalinidad para piscinas - Fontanería Gavilán">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Alcalinidad">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
 </head>
@@ -18,6 +35,16 @@
             <p class="header-subtitle">FONTANERÍA GAVILÁN</p>
             <p class="header-credit">David Carrillo Tirado</p>
         </header>
+
+        <!-- Install PWA Banner -->
+        <div id="install-banner" class="install-banner" style="display: none;">
+            <div class="install-content">
+                <i data-lucide="download"></i>
+                <span>¡Instala la app en tu dispositivo!</span>
+                <button id="install-btn" class="install-button">Instalar</button>
+                <button id="dismiss-btn" class="dismiss-button">×</button>
+            </div>
+        </div>
 
         <!-- Main Content -->
         <main class="main-content">

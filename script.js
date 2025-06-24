@@ -1,9 +1,11 @@
 class AlkalinityCalculator {
     constructor() {
         this.sampleVolume = 50;
+        this.deferredPrompt = null;
         this.initializeElements();
         this.bindEvents();
         this.initializeLucideIcons();
+        this.initializePWA();
     }
 
     initializeElements() {
@@ -13,6 +15,11 @@ class AlkalinityCalculator {
         this.resetBtn = document.getElementById('reset-btn');
         this.resultsSection = document.getElementById('results-section');
         this.sampleButtons = document.querySelectorAll('.sample-button');
+        
+        // PWA elements
+        this.installBanner = document.getElementById('install-banner');
+        this.installBtn = document.getElementById('install-btn');
+        this.dismissBtn = document.getElementById('dismiss-btn');
         
         // Result elements
         this.calculatedAlkalinity = document.getElementById('calculated-alkalinity');
@@ -34,6 +41,14 @@ class AlkalinityCalculator {
             button.addEventListener('click', (e) => this.handleSampleVolumeChange(e));
         });
 
+        // PWA events
+        if (this.installBtn) {
+            this.installBtn.addEventListener('click', () => this.handleInstall());
+        }
+        if (this.dismissBtn) {
+            this.dismissBtn.addEventListener('click', () => this.dismissInstallBanner());
+        }
+
         // Clear errors on input
         this.tabletsInput.addEventListener('input', () => this.clearError('tablets'));
         this.poolVolumeInput.addEventListener('input', () => this.clearError('pool-volume'));
@@ -52,6 +67,66 @@ class AlkalinityCalculator {
         // Initialize Lucide icons after DOM is loaded
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
+        }
+    }
+
+    initializePWA() {
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch((registrationError) => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        }
+
+        // Listen for beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
+            this.showInstallBanner();
+        });
+
+        // Listen for appinstalled event
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            this.dismissInstallBanner();
+        });
+
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('App is running in standalone mode');
+        }
+    }
+
+    showInstallBanner() {
+        if (this.installBanner && !localStorage.getItem('installBannerDismissed')) {
+            this.installBanner.style.display = 'block';
+            // Re-initialize icons for the banner
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }, 100);
+        }
+    }
+
+    dismissInstallBanner() {
+        if (this.installBanner) {
+            this.installBanner.style.display = 'none';
+            localStorage.setItem('installBannerDismissed', 'true');
+        }
+    }
+
+    async handleInstall() {
+        if (this.deferredPrompt) {
+            this.deferredPrompt.prompt();
+            const { outcome } = await this.deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            this.deferredPrompt = null;
+            this.dismissInstallBanner();
         }
     }
 
