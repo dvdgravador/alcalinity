@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Alcalinidad - Fontanería Gavilán</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Calculadora de alcalinidad para piscinas - Fontanería Gavilán">
+    <meta name="theme-color" content="#7c3aed">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Alcalinidad">
+    
+    <!-- Lucide Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #334155;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header styles */
+        .header {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
+            padding: 32px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
+        }
+
+        .header-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .header-icon i {
+            width: 48px;
+            height: 48px;
+            color: #ffffff;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            color: #e9d5ff;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header-credit {
+            font-size: 14px;
+            color: #ddd6fe;
+            font-style: italic;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            background-color: #ffffff;
+            display: flex;
+            border-radius: 16px 16px 0 0;
+            margin: 0 20px;
+            margin-top: 20px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .tab-button {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .tab-button i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .tab-button:hover {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .tab-button.active:hover {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            padding: 0 20px 20px;
+            background-color: #ffffff;
+            margin: 0 20px;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Card styles */
+        .card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            margin: 20px 0;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card-header i {
+            width: 24px;
+            height: 24px;
+            color: #8b5cf6;
+        }
+
+        /* Input styles */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .input {
+            width: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            color: #1e293b;
+            border: 2px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .input.error {
+            border-color: #f87171;
+            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.1);
+        }
+
+        .input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Error styles */
+        .error-container {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            gap: 8px;
+        }
+
+        .error-container i {
+            width: 16px;
+            height: 16px;
+            color: #f87171;
+        }
+
+        .error-text {
+            color: #f87171;
+            font-size: 14px;
+        }
+
+        /* Sample volume buttons */
+        .sample-volume-container {
+            display: flex;
+            gap: 12px;
+        }
+
+        .sample-button {
+            flex: 1;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            color: #475569;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sample-button:hover {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            border-color: #cbd5e1;
+        }
+
+        .sample-button.active {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            border-color: #8b5cf6;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Action buttons */
+        .button-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .calculate-button {
+            flex: 2;
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            border-radius: 12px;
+            padding: 16px;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .calculate-button:hover {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .calculate-button i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .reset-button {
+            flex: 1;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            color: #475569;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reset-button:hover {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        /* Results styles */
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-label {
+            font-size: 16px;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .result-value.warning {
+            color: #f59e0b;
+        }
+
+        .result-value.success {
+            color: #10b981;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 8px 0;
+        }
+
+        .recommendation-container {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #c4b5fd;
+        }
+
+        .recommendation-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #5b21b6;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #7c3aed;
+            margin: 0;
+        }
+
+        .recommendation-note {
+            font-size: 14px;
+            color: #6d28d9;
+            margin-top: 8px;
+        }
+
+        /* Info section styles */
+        .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-item {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .info-header i {
+            width: 24px;
+            height: 24px;
+            color: #8b5cf6;
+        }
+
+        .info-header h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .info-item h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .info-item h4 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .info-item p {
+            font-size: 16px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .info-item p:last-child {
+            margin-bottom: 0;
+        }
+
+        .level-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .level-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .level-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .level-label {
+            font-size: 16px;
+            color: #475569;
+        }
+
+        .level-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
+
+        .level-value-optimal {
+            font-size: 16px;
+            font-weight: bold;
+            color: #10b981;
+        }
+
+        .dosage-info {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .dosage-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dosage-info li {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .dosage-info li::before {
+            content: '•';
+            color: #8b5cf6;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .credits-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-container {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            border-radius: 50px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #c4b5fd;
+        }
+
+        .logo-container i {
+            width: 40px;
+            height: 40px;
+            color: #7c3aed;
+        }
+
+        .credits-text {
+            font-size: 16px;
+            color: #475569;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .credits-highlight {
+            color: #8b5cf6;
+            font-weight: bold;
+        }
+
+        .company-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .company-container i {
+            width: 20px;
+            height: 20px;
+            color: #8b5cf6;
+        }
+
+        .company-text {
+            font-size: 14px;
+            color: #475569;
+            text-align: center;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .company-highlight {
+            color: #f87171;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 24px 16px;
+            }
+            
+            .main-content {
+                padding: 0 16px 16px;
+                margin: 0 16px;
+            }
+            
+            .tab-navigation {
+                margin: 0 16px;
+                margin-top: 20px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .header-title {
+                font-size: 20px;
+            }
+            
+            .header-subtitle {
+                font-size: 14px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+            }
+            
+            .calculate-button,
+            .reset-button {
+                flex: none;
+            }
+
+            .tab-button span {
+                display: none;
+            }
+
+            .tab-button {
+                padding: 16px 12px;
+            }
+        }
+
+        /* Animation for results */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card.show {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .tab-content {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* PWA specific styles */
+        @media (display-mode: standalone) {
+            .header {
+                padding-top: 40px; /* Account for status bar */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-icon">
+                <i data-lucide="droplets"></i>
+            </div>
+            <h1 class="header-title">Calculadora de Alcalinidad</h1>
+            <p class="header-subtitle">FONTANERÍA GAVILÁN</p>
+            <p class="header-credit">David Carrillo Tirado</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <button class="tab-button active" data-tab="calculator">
+                <i data-lucide="calculator"></i>
+                <span>Calculadora</span>
+            </button>
+            <button class="tab-button" data-tab="info">
+                <i data-lucide="info"></i>
+                <span>Información</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Calculator Tab -->
+            <div id="calculator-tab" class="tab-content active">
+                <!-- Input Section -->
+                <section class="card">
+                    <h2 class="card-title">Datos de entrada:</h2>
+                    
+                    <!-- Tablets Input -->
+                    <div class="input-group">
+                        <label class="input-label" for="tablets">Cantidad de pastillas usadas</label>
+                        <input 
+                            type="number" 
+                            id="tablets" 
+                            class="input" 
+                            placeholder="ingresa nº pastillas usadas"
+                            min="0"
+                            step="1"
+                        >
+                        <div class="error-container" id="tablets-error" style="display: none;">
+                            <i data-lucide="alert-circle"></i>
+                            <span class="error-text"></span>
+                        </div>
+                    </div>
+
+                    <!-- Sample Volume Selection -->
+                    <div class="input-group">
+                        <label class="input-label">Muestra</label>
+                        <div class="sample-volume-container">
+                            <button class="sample-button active" data-volume="50">50 ml</button>
+                            <button class="sample-button" data-volume="100">100 ml</button>
+                        </div>
+                    </div>
+
+                    <!-- Pool Volume Input -->
+                    <div class="input-group">
+                        <label class="input-label" for="pool-volume">Volumen de piscina (m³)</label>
+                        <input 
+                            type="number" 
+                            id="pool-volume" 
+                            class="input" 
+                            placeholder="Metros cúbicos de la piscina"
+                            min="0"
+                            step="0.1"
+                        >
+                        <div class="error-container" id="pool-volume-error" style="display: none;">
+                            <i data-lucide="alert-circle"></i>
+                            <span class="error-text"></span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="button-container">
+                        <button class="calculate-button" id="calculate-btn">
+                            <i data-lucide="calculator"></i>
+                            <span>Calcular</span>
+                        </button>
+                        <button class="reset-button" id="reset-btn">Reset</button>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="card" id="results-section" style="display: none;">
+                    <h2 class="card-title">Resultado</h2>
+                    
+                    <div class="result-container">
+                        <div class="result-row">
+                            <span class="result-label">Alcalinidad calculada</span>
+                            <span class="result-value" id="calculated-alkalinity">0 ppm</span>
+                        </div>
+                        
+                        <div class="result-row">
+                            <span class="result-label">Alcalinidad objetivo</span>
+                            <span class="result-value" id="target-alkalinity">125 ppm</span>
+                        </div>
+                        
+                        <div class="result-row">
+                            <span class="result-label">Diferencia</span>
+                            <span class="result-value" id="difference">0 ppm</span>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="recommendation-container">
+                            <h3 class="recommendation-title">Dosis recomendada</h3>
+                            <p class="recommendation-value" id="recommendation">0 kg de ALKA+</p>
+                            <p class="recommendation-note" id="perfect-note" style="display: none;">
+                                ✅ Todo perfecto, no necesitas bicarbonato.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Info Tab -->
+            <div id="info-tab" class="tab-content">
+                <section class="card">
+                    <div class="card-header">
+                        <i data-lucide="info"></i>
+                        <h2 class="card-title">Guía de uso</h2>
+                    </div>
+                    
+                    <div class="info-content">
+                        <div class="info-item">
+                            <div class="info-header">
+                                <i data-lucide="droplets"></i>
+                                <h3>¿Qué es esta movida?</h3>
+                            </div>
+                            <p>Es un indicador de la capacidad del agua para mantener estable el valor del pH. Da inercia al sistema para mantener el equilibrio químico.</p>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-header">
+                                <i data-lucide="check-circle"></i>
+                                <h3>Valores ideales</h3>
+                            </div>
+                            <div class="level-container">
+                                <div class="level-row">
+                                    <span class="level-label">Recomendado:</span>
+                                    <span class="level-value">80-120 ppm</span>
+                                </div>
+                                <div class="level-row">
+                                    <span class="level-label">Perfecto:</span>
+                                    <span class="level-value-optimal">125 ppm</span>
+                                </div>
+                            </div>
+                            <p>Junto al pH y cloro libre es un parámetro importante de mantener en niveles correctos.</p>
+                        </div>
+
+                        <div class="info-item">
+                            <h3>Sobre CTX ALKA+</h3>
+                            <p>CTX ALKA+ es bicarbonato, para incrementar la alcalinidad.</p>
+                            <div class="dosage-info">
+                                <h4>Dosis:</h4>
+                                <ul>
+                                    <li>1.8 kg sube 10 ppm en 100 m³</li>
+                                    <li>Esperar 4-6 horas para volver a medir</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-header">
+                                <i data-lucide="user"></i>
+                                <h3>Créditos</h3>
+                            </div>
+                            <div class="credits-container">
+                                <div class="logo-container">
+                                    <i data-lucide="droplets"></i>
+                                </div>
+                                <p class="credits-text">
+                                    App creada por <span class="credits-highlight">David Carrillo Tirado</span>
+                                </p>
+                                <div class="company-container">
+                                    <i data-lucide="building-2"></i>
+                                    <p class="company-text">
+                                        Para usarla como herramienta en<br>
+                                        <span class="company-highlight">Fontanería Gavilán</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Lucide Icons Script -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <script>
+        class AlkalinityCalculator {
+            constructor() {
+                this.sampleVolume = 50;
+                this.currentTab = 'calculator';
+                this.initializeElements();
+                this.bindEvents();
+                this.initializeLucideIcons();
+            }
+
+            initializeElements() {
+                this.tabletsInput = document.getElementById('tablets');
+                this.poolVolumeInput = document.getElementById('pool-volume');
+                this.calculateBtn = document.getElementById('calculate-btn');
+                this.resetBtn = document.getElementById('reset-btn');
+                this.resultsSection = document.getElementById('results-section');
+                this.sampleButtons = document.querySelectorAll('.sample-button');
+                
+                // Tab elements
+                this.tabButtons = document.querySelectorAll('.tab-button');
+                this.tabContents = document.querySelectorAll('.tab-content');
+                
+                // Result elements
+                this.calculatedAlkalinity = document.getElementById('calculated-alkalinity');
+                this.targetAlkalinity = document.getElementById('target-alkalinity');
+                this.difference = document.getElementById('difference');
+                this.recommendation = document.getElementById('recommendation');
+                this.perfectNote = document.getElementById('perfect-note');
+                
+                // Error elements
+                this.tabletsError = document.getElementById('tablets-error');
+                this.poolVolumeError = document.getElementById('pool-volume-error');
+            }
+
+            bindEvents() {
+                this.calculateBtn.addEventListener('click', () => this.handleCalculate());
+                this.resetBtn.addEventListener('click', () => this.handleReset());
+                
+                this.sampleButtons.forEach(button => {
+                    button.addEventListener('click', (e) => this.handleSampleVolumeChange(e));
+                });
+
+                // Tab events
+                this.tabButtons.forEach(button => {
+                    button.addEventListener('click', (e) => this.handleTabChange(e));
+                });
+
+                // Clear errors on input
+                this.tabletsInput.addEventListener('input', () => this.clearError('tablets'));
+                this.poolVolumeInput.addEventListener('input', () => this.clearError('pool-volume'));
+
+                // Enter key support
+                this.tabletsInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.poolVolumeInput.focus();
+                });
+                
+                this.poolVolumeInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.handleCalculate();
+                });
+            }
+
+            handleTabChange(event) {
+                const targetTab = event.currentTarget.dataset.tab;
+                
+                // Update tab buttons
+                this.tabButtons.forEach(btn => btn.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+                
+                // Update tab contents
+                this.tabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(`${targetTab}-tab`).classList.add('active');
+                
+                this.currentTab = targetTab;
+                
+                // Re-initialize icons after tab change
+                setTimeout(() => {
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                }, 100);
+            }
+
+            initializeLucideIcons() {
+                // Initialize Lucide icons after DOM is loaded
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+
+            handleSampleVolumeChange(event) {
+                const volume = parseInt(event.target.dataset.volume);
+                this.sampleVolume = volume;
+                
+                // Update button states
+                this.sampleButtons.forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+
+            calculateAlkalinity(tabletsCount, sampleMl) {
+                if (sampleMl === 50) {
+                    return tabletsCount * 40 - 20;
+                } else if (sampleMl === 100) {
+                    return tabletsCount * 20 - 10;
+                } else {
+                    throw new Error('Debes elegir si tu muestra es 50ml o 100 ml');
+                }
+            }
+
+            calculateAlkaPlusKilos(differencePpm, volumeM3) {
+                // 1.8 kg of ALKA+ raises 10 ppm in 100 m³
+                // Formula: kilos = (difference_ppm * volume_m3 * 1.8) / (10 * 100)
+                return Math.round((differencePpm * volumeM3 * 1.8) / 1000 * 100) / 100;
+            }
+
+            validateInputs() {
+                let isValid = true;
+                
+                // Clear previous errors
+                this.clearAllErrors();
+
+                const tablets = this.tabletsInput.value.trim();
+                const poolVolume = this.poolVolumeInput.value.trim();
+
+                if (!tablets || isNaN(Number(tablets)) || Number(tablets) < 0) {
+                    this.showError('tablets', 'Por favor, ingresa un número correcto de pastillas.');
+                    isValid = false;
+                }
+
+                if (!poolVolume || isNaN(Number(poolVolume)) || Number(poolVolume) <= 0) {
+                    this.showError('pool-volume', 'Ingresa los metros cúbicos del vaso de la piscina');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            showError(field, message) {
+                const input = document.getElementById(field);
+                const errorContainer = document.getElementById(`${field}-error`);
+                const errorText = errorContainer.querySelector('.error-text');
+                
+                input.classList.add('error');
+                errorText.textContent = message;
+                errorContainer.style.display = 'flex';
+            }
+
+            clearError(field) {
+                const input = document.getElementById(field);
+                const errorContainer = document.getElementById(`${field}-error`);
+                
+                input.classList.remove('error');
+                errorContainer.style.display = 'none';
+            }
+
+            clearAllErrors() {
+                this.clearError('tablets');
+                this.clearError('pool-volume');
+            }
+
+            handleCalculate() {
+                if (!this.validateInputs()) return;
+
+                try {
+                    const tabletsCount = Number(this.tabletsInput.value);
+                    const volumeM3 = Number(this.poolVolumeInput.value);
+                    const alkalinity = this.calculateAlkalinity(tabletsCount, this.sampleVolume);
+                    const targetAlkalinity = 125; // ppm recommended
+                    const difference = Math.max(0, targetAlkalinity - alkalinity);
+                    const alkaPlusKilos = this.calculateAlkaPlusKilos(difference, volumeM3);
+
+                    this.displayResults({
+                        alkalinity,
+                        targetAlkalinity,
+                        difference,
+                        alkaPlusKilos
+                    });
+
+                } catch (error) {
+                    alert('Algo ha fallado...:(');
+                }
+            }
+
+            displayResults(result) {
+                // Update result values
+                this.calculatedAlkalinity.textContent = `${result.alkalinity} ppm`;
+                this.targetAlkalinity.textContent = `${result.targetAlkalinity} ppm`;
+                this.difference.textContent = `${result.difference} ppm`;
+                this.recommendation.textContent = `${result.alkaPlusKilos} kg de ALKA+`;
+
+                // Update difference color
+                this.difference.classList.remove('warning', 'success');
+                if (result.difference > 0) {
+                    this.difference.classList.add('warning');
+                } else {
+                    this.difference.classList.add('success');
+                }
+
+                // Show/hide perfect note
+                if (result.difference === 0) {
+                    this.perfectNote.style.display = 'block';
+                } else {
+                    this.perfectNote.style.display = 'none';
+                }
+
+                // Show results section with animation
+                this.resultsSection.style.display = 'block';
+                this.resultsSection.classList.add('show');
+                
+                // Scroll to results
+                this.resultsSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+
+            handleReset() {
+                // Clear inputs
+                this.tabletsInput.value = '';
+                this.poolVolumeInput.value = '';
+                
+                // Reset sample volume to 50ml
+                this.sampleVolume = 50;
+                this.sampleButtons.forEach(btn => btn.classList.remove('active'));
+                this.sampleButtons[0].classList.add('active'); // First button is 50ml
+                
+                // Hide results
+                this.resultsSection.style.display = 'none';
+                this.resultsSection.classList.remove('show');
+                
+                // Clear errors
+                this.clearAllErrors();
+                
+                // Focus on first input
+                this.tabletsInput.focus();
+            }
+        }
+
+        // Initialize the calculator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new AlkalinityCalculator();
+        });
+    </script>
+</body>
+</html>
