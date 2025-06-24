@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Info, Droplets, TriangleAlert as AlertTriangle, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { Info, Droplets, CircleCheck as CheckCircle, User, Building2 } from 'lucide-react-native';
+import { GavilanLogo } from '@/components/GavilanLogo';
 
 export default function InfoScreen() {
   return (
@@ -48,8 +49,6 @@ export default function InfoScreen() {
           </Text>
         </View>
 
-      
-
         {/* ALKA+ Information Card */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Sobre CTX ALKA+</Text>
@@ -63,7 +62,28 @@ export default function InfoScreen() {
           </View>
         </View>
 
-      
+        {/* Credits Card */}
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <User size={24} color="#ef4444" />
+            <Text style={styles.cardTitle}>Créditos</Text>
+          </View>
+          <View style={styles.creditsContainer}>
+            <View style={styles.logoContainer}>
+              <GavilanLogo size={60} color="#ef4444" />
+            </View>
+            <Text style={styles.creditsText}>
+              App creada por <Text style={styles.creditsHighlight}>David Carrillo</Text>
+            </Text>
+            <View style={styles.companyContainer}>
+              <Building2 size={20} color="#3b82f6" />
+              <Text style={styles.companyText}>
+                Para usarla como herramienta en{'\n'}
+                <Text style={styles.companyHighlight}>Fontanería Gavilán</Text>
+              </Text>
+            </View>
+          </View>
+        </View>
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
@@ -160,14 +180,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#10b981',
   },
-  instructionContainer: {
-    gap: 12,
-  },
-  instructionStep: {
-    fontSize: 16,
-    color: '#e2e8f0',
-    lineHeight: 24,
-  },
   dosageInfo: {
     backgroundColor: '#334155',
     borderRadius: 12,
@@ -186,13 +198,45 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginBottom: 4,
   },
-  safetyContainer: {
-    gap: 8,
+  creditsContainer: {
+    alignItems: 'center',
+    gap: 16,
   },
-  safetyText: {
+  logoContainer: {
+    backgroundColor: '#334155',
+    borderRadius: 50,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  creditsText: {
+    fontSize: 16,
+    color: '#e2e8f0',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  creditsHighlight: {
+    color: '#3b82f6',
+    fontWeight: 'bold',
+  },
+  companyContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: '#334155',
+    borderRadius: 12,
+    padding: 16,
+  },
+  companyText: {
     fontSize: 14,
     color: '#e2e8f0',
+    textAlign: 'center',
     lineHeight: 20,
+  },
+  companyHighlight: {
+    color: '#ef4444',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   bottomSpacer: {
     height: 20,

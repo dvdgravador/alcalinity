@@ -11,7 +11,8 @@ import {
   Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Droplets, Calculator, CircleAlert as AlertCircle } from 'lucide-react-native';
+import { Calculator, CircleAlert as AlertCircle } from 'lucide-react-native';
+import { GavilanLogo } from '@/components/GavilanLogo';
 
 interface CalculationResult {
   alkalinity: number;
@@ -109,10 +110,10 @@ export default function PoolCalculator() {
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.headerIcon}>
-              <Droplets size={32} color="#ffffff" />
+              <GavilanLogo size={48} color="#ffffff" />
             </View>
             <Text style={styles.headerTitle}>Calculadora de Alcalinidad</Text>
-            <Text style={styles.headerSubtitle}>DAVID CARRILLO</Text>
+            <Text style={styles.headerSubtitle}>FONTANERÍA GAVILÁN</Text>
           </View>
 
           {/* Input Section */}
@@ -251,10 +252,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#1e40af',
   },
   headerIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#3b82f6',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#ef4444',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
@@ -270,6 +271,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#93c5fd',
     textAlign: 'center',
+    fontWeight: '600',
   },
   card: {
     backgroundColor: '#1e293b',
