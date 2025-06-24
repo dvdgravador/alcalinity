@@ -10,14 +10,13 @@ export function useFrameworkReady() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // Ensure the framework is ready
-    const initializeFramework = async () => {
+    const initializeFramework = () => {
       try {
-        // Add a small delay to ensure everything is properly initialized
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        if (typeof window !== 'undefined' && window.frameworkReady) {
-          window.frameworkReady();
+        // Check if we're in a browser environment
+        if (typeof window !== 'undefined') {
+          if (window.frameworkReady) {
+            window.frameworkReady();
+          }
         }
         
         setIsReady(true);
@@ -27,7 +26,10 @@ export function useFrameworkReady() {
       }
     };
 
-    initializeFramework();
+    // Use a small timeout to ensure the environment is ready
+    const timer = setTimeout(initializeFramework, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   return isReady;

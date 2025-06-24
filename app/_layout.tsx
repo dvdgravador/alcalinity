@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,16 +8,36 @@ import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  useFrameworkReady();
+  const [appIsReady, setAppIsReady] = useState(false);
+  const isFrameworkReady = useFrameworkReady();
 
   useEffect(() => {
-    // Hide splash screen after a short delay to ensure everything is loaded
-    const timer = setTimeout(() => {
-      SplashScreen.hideAsync();
-    }, 1000);
+    async function prepare() {
+      try {
+        // Wait for framework to be ready
+        if (isFrameworkReady) {
+          // Simulate any additional loading if needed
+          await new Promise(resolve => setTimeout(resolve, 500));
+          setAppIsReady(true);
+        }
+      } catch (e) {
+        console.warn(e);
+        setAppIsReady(true); // Set to true even on error to prevent infinite loading
+      }
+    }
 
-    return () => clearTimeout(timer);
-  }, []);
+    prepare();
+  }, [isFrameworkReady]);
+
+  useEffect(() => {
+    if (appIsReady) {
+      SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
 
   return (
     <>
