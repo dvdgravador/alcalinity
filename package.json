@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "dev": "live-server",
-    "start": "live-server"
+    "start": "live-server",
+    "build": "echo 'Building for production...' && echo 'Files ready for PWA Builder'",
+    "serve": "python -m http.server 8000"
   },
   "keywords": [
     "calculator",
@@ -13,7 +15,10 @@
     "pool",
     "javascript",
     "html",
-    "css"
+    "css",
+    "pwa",
+    "android",
+    "apk"
   ],
   "author": "David Carrillo Tirado",
   "license": "ISC",

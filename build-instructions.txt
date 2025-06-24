@@ -1,0 +1,40 @@
+INSTRUCCIONES RÁPIDAS PARA GENERAR APK:
+
+=== MÉTODO RECOMENDADO: PWA Builder ===
+
+1. Ve a: https://www.pwabuilder.com/
+2. Introduce la URL de tu PWA
+3. Haz clic en "Start"
+4. Selecciona "Android"
+5. Descarga el APK
+
+=== MÉTODO ALTERNATIVO: Capacitor ===
+
+1. Instalar Capacitor:
+   npm install -g @capacitor/cli
+   npm install @capacitor/core @capacitor/android
+
+2. Inicializar:
+   npx cap init "Calculadora Alcalinidad" "com.fontaneria.gavilan.alcalinidad"
+
+3. Agregar Android:
+   npx cap add android
+
+4. Copiar archivos:
+   npx cap copy
+
+5. Abrir en Android Studio:
+   npx cap open android
+
+6. En Android Studio, hacer clic en "Build" > "Build Bundle(s) / APK(s)" > "Build APK(s)"
+
+=== PARA COMPARTIR LOCALMENTE ===
+
+- Envía el archivo .apk por WhatsApp/Email
+- O sube a Google Drive/Dropbox y comparte el enlace
+- Los usuarios deben permitir "Instalar desde fuentes desconocidas" en Android
+
+=== SERVIDOR LOCAL PARA TESTING ===
+
+python -m http.server 8000
+# Luego comparte: http://TU_IP_LOCAL:8000

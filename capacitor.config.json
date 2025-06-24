@@ -1,0 +1,13 @@
+{
+  "appId": "com.fontaneria.gavilan.alcalinidad",
+  "appName": "Calculadora Alcalinidad",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true
+  }
+}
