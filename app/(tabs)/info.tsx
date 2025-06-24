@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Info, Droplets, CircleCheck as CheckCircle, User, Building2 } from 'lucide-react-native';
 
@@ -69,14 +69,10 @@ export default function InfoScreen() {
           </View>
           <View style={styles.creditsContainer}>
             <View style={styles.logoContainer}>
-              <Image 
-                source={{ uri: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2' }}
-                style={styles.logoImage}
-                resizeMode="cover"
-              />
+              <Droplets size={40} color="#3b82f6" />
             </View>
             <Text style={styles.creditsText}>
-              App creada por <Text style={styles.creditsHighlight}>David Carrillo</Text>
+              App creada por <Text style={styles.creditsHighlight}>David Carrillo Tirado</Text>
             </Text>
             <View style={styles.companyContainer}>
               <Building2 size={20} color="#3b82f6" />
@@ -208,17 +204,11 @@ const styles = StyleSheet.create({
   logoContainer: {
     backgroundColor: '#334155',
     borderRadius: 50,
-    padding: 4,
+    padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
     width: 100,
     height: 100,
-    overflow: 'hidden',
-  },
-  logoImage: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 46,
   },
   creditsText: {
     fontSize: 16,

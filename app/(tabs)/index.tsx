@@ -9,10 +9,9 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calculator, CircleAlert as AlertCircle } from 'lucide-react-native';
+import { Calculator, CircleAlert as AlertCircle, Droplets } from 'lucide-react-native';
 
 interface CalculationResult {
   alkalinity: number;
@@ -110,14 +109,11 @@ export default function PoolCalculator() {
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.headerIcon}>
-              <Image 
-                source={{ uri: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2' }}
-                style={styles.logoImage}
-                resizeMode="cover"
-              />
+              <Droplets size={48} color="#ffffff" />
             </View>
             <Text style={styles.headerTitle}>Calculadora de Alcalinidad</Text>
             <Text style={styles.headerSubtitle}>FONTANERÍA GAVILÁN</Text>
+            <Text style={styles.headerCredit}>David Carrillo Tirado</Text>
           </View>
 
           {/* Input Section */}
@@ -259,15 +255,15 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#ef4444',
+    backgroundColor: '#3b82f6',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    overflow: 'hidden',
-  },
-  logoImage: {
-    width: '100%',
-    height: '100%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
   headerTitle: {
     fontSize: 24,
@@ -281,6 +277,13 @@ const styles = StyleSheet.create({
     color: '#93c5fd',
     textAlign: 'center',
     fontWeight: '600',
+    marginBottom: 4,
+  },
+  headerCredit: {
+    fontSize: 14,
+    color: '#60a5fa',
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
   card: {
     backgroundColor: '#1e293b',
