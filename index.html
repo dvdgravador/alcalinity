@@ -7,7 +7,7 @@
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Calculadora de alcalinidad para piscinas - Fontanería Gavilán">
-    <meta name="theme-color" content="#1e40af">
+    <meta name="theme-color" content="#7c3aed">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Alcalinidad">
@@ -46,166 +46,183 @@
             </div>
         </div>
 
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <button class="tab-button active" data-tab="calculator">
+                <i data-lucide="calculator"></i>
+                <span>Calculadora</span>
+            </button>
+            <button class="tab-button" data-tab="info">
+                <i data-lucide="info"></i>
+                <span>Información</span>
+            </button>
+        </nav>
+
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Input Section -->
-            <section class="card">
-                <h2 class="card-title">Datos de entrada:</h2>
-                
-                <!-- Tablets Input -->
-                <div class="input-group">
-                    <label class="input-label" for="tablets">Cantidad de pastillas usadas</label>
-                    <input 
-                        type="number" 
-                        id="tablets" 
-                        class="input" 
-                        placeholder="ingresa nº pastillas usadas"
-                        min="0"
-                        step="1"
-                    >
-                    <div class="error-container" id="tablets-error" style="display: none;">
-                        <i data-lucide="alert-circle"></i>
-                        <span class="error-text"></span>
-                    </div>
-                </div>
-
-                <!-- Sample Volume Selection -->
-                <div class="input-group">
-                    <label class="input-label">Muestra</label>
-                    <div class="sample-volume-container">
-                        <button class="sample-button active" data-volume="50">50 ml</button>
-                        <button class="sample-button" data-volume="100">100 ml</button>
-                    </div>
-                </div>
-
-                <!-- Pool Volume Input -->
-                <div class="input-group">
-                    <label class="input-label" for="pool-volume">Volumen de piscina (m³)</label>
-                    <input 
-                        type="number" 
-                        id="pool-volume" 
-                        class="input" 
-                        placeholder="Metros cúbicos de la piscina"
-                        min="0"
-                        step="0.1"
-                    >
-                    <div class="error-container" id="pool-volume-error" style="display: none;">
-                        <i data-lucide="alert-circle"></i>
-                        <span class="error-text"></span>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="button-container">
-                    <button class="calculate-button" id="calculate-btn">
-                        <i data-lucide="calculator"></i>
-                        <span>Calcular</span>
-                    </button>
-                    <button class="reset-button" id="reset-btn">Reset</button>
-                </div>
-            </section>
-
-            <!-- Results Section -->
-            <section class="card" id="results-section" style="display: none;">
-                <h2 class="card-title">Resultado</h2>
-                
-                <div class="result-container">
-                    <div class="result-row">
-                        <span class="result-label">Alcalinidad calculada</span>
-                        <span class="result-value" id="calculated-alkalinity">0 ppm</span>
-                    </div>
+            <!-- Calculator Tab -->
+            <div id="calculator-tab" class="tab-content active">
+                <!-- Input Section -->
+                <section class="card">
+                    <h2 class="card-title">Datos de entrada:</h2>
                     
-                    <div class="result-row">
-                        <span class="result-label">Alcalinidad objetivo</span>
-                        <span class="result-value" id="target-alkalinity">125 ppm</span>
+                    <!-- Tablets Input -->
+                    <div class="input-group">
+                        <label class="input-label" for="tablets">Cantidad de pastillas usadas</label>
+                        <input 
+                            type="number" 
+                            id="tablets" 
+                            class="input" 
+                            placeholder="ingresa nº pastillas usadas"
+                            min="0"
+                            step="1"
+                        >
+                        <div class="error-container" id="tablets-error" style="display: none;">
+                            <i data-lucide="alert-circle"></i>
+                            <span class="error-text"></span>
+                        </div>
                     </div>
+
+                    <!-- Sample Volume Selection -->
+                    <div class="input-group">
+                        <label class="input-label">Muestra</label>
+                        <div class="sample-volume-container">
+                            <button class="sample-button active" data-volume="50">50 ml</button>
+                            <button class="sample-button" data-volume="100">100 ml</button>
+                        </div>
+                    </div>
+
+                    <!-- Pool Volume Input -->
+                    <div class="input-group">
+                        <label class="input-label" for="pool-volume">Volumen de piscina (m³)</label>
+                        <input 
+                            type="number" 
+                            id="pool-volume" 
+                            class="input" 
+                            placeholder="Metros cúbicos de la piscina"
+                            min="0"
+                            step="0.1"
+                        >
+                        <div class="error-container" id="pool-volume-error" style="display: none;">
+                            <i data-lucide="alert-circle"></i>
+                            <span class="error-text"></span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="button-container">
+                        <button class="calculate-button" id="calculate-btn">
+                            <i data-lucide="calculator"></i>
+                            <span>Calcular</span>
+                        </button>
+                        <button class="reset-button" id="reset-btn">Reset</button>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="card" id="results-section" style="display: none;">
+                    <h2 class="card-title">Resultado</h2>
                     
-                    <div class="result-row">
-                        <span class="result-label">Diferencia</span>
-                        <span class="result-value" id="difference">0 ppm</span>
-                    </div>
-                    
-                    <div class="divider"></div>
-                    
-                    <div class="recommendation-container">
-                        <h3 class="recommendation-title">Dosis recomendada</h3>
-                        <p class="recommendation-value" id="recommendation">0 kg de ALKA+</p>
-                        <p class="recommendation-note" id="perfect-note" style="display: none;">
-                            ✅ Todo perfecto, no necesitas bicarbonato.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Info Section -->
-            <section class="card">
-                <div class="card-header">
-                    <i data-lucide="info"></i>
-                    <h2 class="card-title">Guía de uso</h2>
-                </div>
-                
-                <div class="info-content">
-                    <div class="info-item">
-                        <div class="info-header">
-                            <i data-lucide="droplets"></i>
-                            <h3>¿Qué es esta movida?</h3>
+                    <div class="result-container">
+                        <div class="result-row">
+                            <span class="result-label">Alcalinidad calculada</span>
+                            <span class="result-value" id="calculated-alkalinity">0 ppm</span>
                         </div>
-                        <p>Es un indicador de la capacidad del agua para mantener estable el valor del pH. Da inercia al sistema para mantener el equilibrio químico.</p>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-header">
-                            <i data-lucide="check-circle"></i>
-                            <h3>Valores ideales</h3>
+                        
+                        <div class="result-row">
+                            <span class="result-label">Alcalinidad objetivo</span>
+                            <span class="result-value" id="target-alkalinity">125 ppm</span>
                         </div>
-                        <div class="level-container">
-                            <div class="level-row">
-                                <span class="level-label">Recomendado:</span>
-                                <span class="level-value">80-120 ppm</span>
-                            </div>
-                            <div class="level-row">
-                                <span class="level-label">Perfecto:</span>
-                                <span class="level-value-optimal">125 ppm</span>
-                            </div>
+                        
+                        <div class="result-row">
+                            <span class="result-label">Diferencia</span>
+                            <span class="result-value" id="difference">0 ppm</span>
                         </div>
-                        <p>Junto al pH y cloro libre es un parámetro importante de mantener en niveles correctos.</p>
-                    </div>
-
-                    <div class="info-item">
-                        <h3>Sobre CTX ALKA+</h3>
-                        <p>CTX ALKA+ es bicarbonato, para incrementar la alcalinidad.</p>
-                        <div class="dosage-info">
-                            <h4>Dosis:</h4>
-                            <ul>
-                                <li>1.8 kg sube 10 ppm en 100 m³</li>
-                                <li>Esperar 4-6 horas para volver a medir</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-header">
-                            <i data-lucide="user"></i>
-                            <h3>Créditos</h3>
-                        </div>
-                        <div class="credits-container">
-                            <div class="logo-container">
-                                <i data-lucide="droplets"></i>
-                            </div>
-                            <p class="credits-text">
-                                App creada por <span class="credits-highlight">David Carrillo Tirado</span>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="recommendation-container">
+                            <h3 class="recommendation-title">Dosis recomendada</h3>
+                            <p class="recommendation-value" id="recommendation">0 kg de ALKA+</p>
+                            <p class="recommendation-note" id="perfect-note" style="display: none;">
+                                ✅ Todo perfecto, no necesitas bicarbonato.
                             </p>
-                            <div class="company-container">
-                                <i data-lucide="building-2"></i>
-                                <p class="company-text">
-                                    Para usarla como herramienta en<br>
-                                    <span class="company-highlight">Fontanería Gavilán</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Info Tab -->
+            <div id="info-tab" class="tab-content">
+                <section class="card">
+                    <div class="card-header">
+                        <i data-lucide="info"></i>
+                        <h2 class="card-title">Guía de uso</h2>
+                    </div>
+                    
+                    <div class="info-content">
+                        <div class="info-item">
+                            <div class="info-header">
+                                <i data-lucide="droplets"></i>
+                                <h3>¿Qué es esta movida?</h3>
+                            </div>
+                            <p>Es un indicador de la capacidad del agua para mantener estable el valor del pH. Da inercia al sistema para mantener el equilibrio químico.</p>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-header">
+                                <i data-lucide="check-circle"></i>
+                                <h3>Valores ideales</h3>
+                            </div>
+                            <div class="level-container">
+                                <div class="level-row">
+                                    <span class="level-label">Recomendado:</span>
+                                    <span class="level-value">80-120 ppm</span>
+                                </div>
+                                <div class="level-row">
+                                    <span class="level-label">Perfecto:</span>
+                                    <span class="level-value-optimal">125 ppm</span>
+                                </div>
+                            </div>
+                            <p>Junto al pH y cloro libre es un parámetro importante de mantener en niveles correctos.</p>
+                        </div>
+
+                        <div class="info-item">
+                            <h3>Sobre CTX ALKA+</h3>
+                            <p>CTX ALKA+ es bicarbonato, para incrementar la alcalinidad.</p>
+                            <div class="dosage-info">
+                                <h4>Dosis:</h4>
+                                <ul>
+                                    <li>1.8 kg sube 10 ppm en 100 m³</li>
+                                    <li>Esperar 4-6 horas para volver a medir</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-header">
+                                <i data-lucide="user"></i>
+                                <h3>Créditos</h3>
+                            </div>
+                            <div class="credits-container">
+                                <div class="logo-container">
+                                    <i data-lucide="droplets"></i>
+                                </div>
+                                <p class="credits-text">
+                                    App creada por <span class="credits-highlight">David Carrillo Tirado</span>
                                 </p>
+                                <div class="company-container">
+                                    <i data-lucide="building-2"></i>
+                                    <p class="company-text">
+                                        Para usarla como herramienta en<br>
+                                        <span class="company-highlight">Fontanería Gavilán</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </main>
     </div>
 

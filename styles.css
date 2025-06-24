@@ -7,8 +7,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #0f172a;
-    color: #ffffff;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #334155;
     line-height: 1.6;
     min-height: 100vh;
 }
@@ -21,24 +21,25 @@ body {
 
 /* Header styles */
 .header {
-    background-color: #1e40af;
+    background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
     padding: 32px 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
 }
 
 .header-icon {
     width: 80px;
     height: 80px;
     border-radius: 40px;
-    background-color: #3b82f6;
+    background: linear-gradient(135deg, #c4b5fd, #a78bfa);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
 }
 
 .header-icon i {
@@ -56,22 +57,22 @@ body {
 
 .header-subtitle {
     font-size: 16px;
-    color: #93c5fd;
+    color: #e9d5ff;
     font-weight: 600;
     margin-bottom: 4px;
 }
 
 .header-credit {
     font-size: 14px;
-    color: #60a5fa;
+    color: #ddd6fe;
     font-style: italic;
 }
 
 /* Install Banner */
 .install-banner {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #34d399, #10b981);
     padding: 12px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
 }
 
 .install-content {
@@ -129,25 +130,87 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Tab Navigation */
+.tab-navigation {
+    background-color: #ffffff;
+    display: flex;
+    border-radius: 16px 16px 0 0;
+    margin: 0 20px;
+    margin-top: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.tab-button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.tab-button i {
+    width: 20px;
+    height: 20px;
+}
+
+.tab-button:hover {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.tab-button.active {
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+}
+
+.tab-button.active:hover {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
 /* Main content */
 .main-content {
     flex: 1;
     padding: 0 20px 20px;
+    background-color: #ffffff;
+    margin: 0 20px;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 /* Card styles */
 .card {
-    background-color: #1e293b;
-    margin: 10px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    margin: 20px 0;
     border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
 }
 
 .card-title {
     font-size: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: #1e293b;
     margin-bottom: 20px;
 }
 
@@ -161,7 +224,7 @@ body {
 .card-header i {
     width: 24px;
     height: 24px;
-    color: #3b82f6;
+    color: #8b5cf6;
 }
 
 /* Input styles */
@@ -173,28 +236,30 @@ body {
     display: block;
     font-size: 16px;
     font-weight: 600;
-    color: #e2e8f0;
+    color: #475569;
     margin-bottom: 8px;
 }
 
 .input {
     width: 100%;
-    background-color: #334155;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border-radius: 12px;
     padding: 16px;
     font-size: 16px;
-    color: #ffffff;
-    border: 2px solid #475569;
-    transition: border-color 0.2s ease;
+    color: #1e293b;
+    border: 2px solid #e2e8f0;
+    transition: all 0.2s ease;
 }
 
 .input:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
 
 .input.error {
-    border-color: #ef4444;
+    border-color: #f87171;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.1);
 }
 
 .input::placeholder {
@@ -212,11 +277,11 @@ body {
 .error-container i {
     width: 16px;
     height: 16px;
-    color: #ef4444;
+    color: #f87171;
 }
 
 .error-text {
-    color: #ef4444;
+    color: #f87171;
     font-size: 14px;
 }
 
@@ -228,11 +293,11 @@ body {
 
 .sample-button {
     flex: 1;
-    background-color: #475569;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
     border-radius: 12px;
     padding: 16px;
-    border: 2px solid #475569;
-    color: #e2e8f0;
+    border: 2px solid #e2e8f0;
+    color: #475569;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -240,13 +305,15 @@ body {
 }
 
 .sample-button:hover {
-    background-color: #64748b;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    border-color: #cbd5e1;
 }
 
 .sample-button.active {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
+    background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+    border-color: #8b5cf6;
     color: #ffffff;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
 /* Action buttons */
@@ -258,7 +325,7 @@ body {
 
 .calculate-button {
     flex: 2;
-    background-color: #3b82f6;
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
     border-radius: 12px;
     padding: 16px;
     border: none;
@@ -270,11 +337,14 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .calculate-button:hover {
-    background-color: #2563eb;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .calculate-button i {
@@ -284,19 +354,21 @@ body {
 
 .reset-button {
     flex: 1;
-    background-color: #475569;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
     border-radius: 12px;
     padding: 16px;
-    border: none;
-    color: #e2e8f0;
+    border: 2px solid #e2e8f0;
+    color: #475569;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .reset-button:hover {
-    background-color: #64748b;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
 }
 
 /* Results styles */
@@ -310,17 +382,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
 }
 
 .result-label {
     font-size: 16px;
-    color: #e2e8f0;
+    color: #475569;
+    font-weight: 500;
 }
 
 .result-value {
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
+    color: #1e293b;
 }
 
 .result-value.warning {
@@ -333,34 +410,35 @@ body {
 
 .divider {
     height: 1px;
-    background-color: #475569;
+    background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
     margin: 8px 0;
 }
 
 .recommendation-container {
-    background-color: #1e40af;
-    border-radius: 12px;
-    padding: 16px;
+    background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+    border-radius: 16px;
+    padding: 20px;
     text-align: center;
+    border: 1px solid #c4b5fd;
 }
 
 .recommendation-title {
     font-size: 18px;
     font-weight: bold;
-    color: #ffffff;
+    color: #5b21b6;
     margin-bottom: 8px;
 }
 
 .recommendation-value {
     font-size: 24px;
     font-weight: bold;
-    color: #60a5fa;
+    color: #7c3aed;
     margin: 0;
 }
 
 .recommendation-note {
     font-size: 14px;
-    color: #93c5fd;
+    color: #6d28d9;
     margin-top: 8px;
 }
 
@@ -372,9 +450,10 @@ body {
 }
 
 .info-item {
-    background-color: #334155;
-    border-radius: 12px;
-    padding: 16px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
 }
 
 .info-header {
@@ -387,34 +466,34 @@ body {
 .info-header i {
     width: 24px;
     height: 24px;
-    color: #3b82f6;
+    color: #8b5cf6;
 }
 
 .info-header h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #ffffff;
+    color: #1e293b;
     margin: 0;
 }
 
 .info-item h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #ffffff;
+    color: #1e293b;
     margin-bottom: 12px;
 }
 
 .info-item h4 {
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
+    color: #1e293b;
     margin-bottom: 12px;
 }
 
 .info-item p {
     font-size: 16px;
-    color: #e2e8f0;
-    line-height: 1.5;
+    color: #475569;
+    line-height: 1.6;
     margin-bottom: 12px;
 }
 
@@ -423,10 +502,11 @@ body {
 }
 
 .level-container {
-    background-color: #475569;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border-radius: 12px;
     padding: 16px;
     margin: 16px 0;
+    border: 1px solid #e2e8f0;
 }
 
 .level-row {
@@ -442,13 +522,13 @@ body {
 
 .level-label {
     font-size: 16px;
-    color: #e2e8f0;
+    color: #475569;
 }
 
 .level-value {
     font-size: 16px;
     font-weight: bold;
-    color: #3b82f6;
+    color: #8b5cf6;
 }
 
 .level-value-optimal {
@@ -458,10 +538,11 @@ body {
 }
 
 .dosage-info {
-    background-color: #475569;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border-radius: 12px;
     padding: 16px;
     margin-top: 16px;
+    border: 1px solid #e2e8f0;
 }
 
 .dosage-info ul {
@@ -471,7 +552,7 @@ body {
 
 .dosage-info li {
     font-size: 14px;
-    color: #e2e8f0;
+    color: #475569;
     line-height: 1.5;
     margin-bottom: 4px;
     position: relative;
@@ -480,9 +561,10 @@ body {
 
 .dosage-info li::before {
     content: '•';
-    color: #3b82f6;
+    color: #8b5cf6;
     position: absolute;
     left: 0;
+    font-weight: bold;
 }
 
 .credits-container {
@@ -493,7 +575,7 @@ body {
 }
 
 .logo-container {
-    background-color: #475569;
+    background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
     border-radius: 50px;
     padding: 20px;
     display: flex;
@@ -501,23 +583,24 @@ body {
     justify-content: center;
     width: 100px;
     height: 100px;
+    border: 2px solid #c4b5fd;
 }
 
 .logo-container i {
     width: 40px;
     height: 40px;
-    color: #3b82f6;
+    color: #7c3aed;
 }
 
 .credits-text {
     font-size: 16px;
-    color: #e2e8f0;
+    color: #475569;
     text-align: center;
     line-height: 1.5;
 }
 
 .credits-highlight {
-    color: #3b82f6;
+    color: #8b5cf6;
     font-weight: bold;
 }
 
@@ -525,27 +608,28 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: #475569;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border-radius: 12px;
     padding: 16px;
+    border: 1px solid #e2e8f0;
 }
 
 .company-container i {
     width: 20px;
     height: 20px;
-    color: #3b82f6;
+    color: #8b5cf6;
 }
 
 .company-text {
     font-size: 14px;
-    color: #e2e8f0;
+    color: #475569;
     text-align: center;
     line-height: 1.4;
     margin: 0;
 }
 
 .company-highlight {
-    color: #ef4444;
+    color: #f87171;
     font-weight: bold;
     font-size: 16px;
 }
@@ -558,10 +642,16 @@ body {
     
     .main-content {
         padding: 0 16px 16px;
+        margin: 0 16px;
+    }
+    
+    .tab-navigation {
+        margin: 0 16px;
+        margin-top: 20px;
     }
     
     .card {
-        padding: 16px;
+        padding: 20px;
     }
     
     .header-title {
@@ -589,6 +679,14 @@ body {
     .install-content span {
         font-size: 13px;
     }
+
+    .tab-button span {
+        display: none;
+    }
+
+    .tab-button {
+        padding: 16px 12px;
+    }
 }
 
 /* Animation for results */
@@ -605,6 +703,10 @@ body {
 
 .card.show {
     animation: fadeIn 0.3s ease-out;
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 /* PWA specific styles */

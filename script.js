@@ -2,6 +2,7 @@ class AlkalinityCalculator {
     constructor() {
         this.sampleVolume = 50;
         this.deferredPrompt = null;
+        this.currentTab = 'calculator';
         this.initializeElements();
         this.bindEvents();
         this.initializeLucideIcons();
@@ -15,6 +16,10 @@ class AlkalinityCalculator {
         this.resetBtn = document.getElementById('reset-btn');
         this.resultsSection = document.getElementById('results-section');
         this.sampleButtons = document.querySelectorAll('.sample-button');
+        
+        // Tab elements
+        this.tabButtons = document.querySelectorAll('.tab-button');
+        this.tabContents = document.querySelectorAll('.tab-content');
         
         // PWA elements
         this.installBanner = document.getElementById('install-banner');
@@ -41,6 +46,11 @@ class AlkalinityCalculator {
             button.addEventListener('click', (e) => this.handleSampleVolumeChange(e));
         });
 
+        // Tab events
+        this.tabButtons.forEach(button => {
+            button.addEventListener('click', (e) => this.handleTabChange(e));
+        });
+
         // PWA events
         if (this.installBtn) {
             this.installBtn.addEventListener('click', () => this.handleInstall());
@@ -61,6 +71,27 @@ class AlkalinityCalculator {
         this.poolVolumeInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.handleCalculate();
         });
+    }
+
+    handleTabChange(event) {
+        const targetTab = event.currentTarget.dataset.tab;
+        
+        // Update tab buttons
+        this.tabButtons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        
+        // Update tab contents
+        this.tabContents.forEach(content => content.classList.remove('active'));
+        document.getElementById(`${targetTab}-tab`).classList.add('active');
+        
+        this.currentTab = targetTab;
+        
+        // Re-initialize icons after tab change
+        setTimeout(() => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }, 100);
     }
 
     initializeLucideIcons() {
