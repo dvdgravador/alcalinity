@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Info, Droplets, CircleCheck as CheckCircle, User, Building2 } from 'lucide-react-native';
-import { GavilanLogo } from '@/components/GavilanLogo';
 
 export default function InfoScreen() {
   return (
@@ -70,7 +69,11 @@ export default function InfoScreen() {
           </View>
           <View style={styles.creditsContainer}>
             <View style={styles.logoContainer}>
-              <GavilanLogo size={60} color="#ef4444" />
+              <Image 
+                source={require('@/assets/images/gavilan-logo.png')} 
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
             </View>
             <Text style={styles.creditsText}>
               App creada por <Text style={styles.creditsHighlight}>David Carrillo</Text>
@@ -208,6 +211,12 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    width: 100,
+    height: 100,
+  },
+  logoImage: {
+    width: '100%',
+    height: '100%',
   },
   creditsText: {
     fontSize: 16,

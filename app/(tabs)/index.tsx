@@ -9,10 +9,10 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calculator, CircleAlert as AlertCircle } from 'lucide-react-native';
-import { GavilanLogo } from '@/components/GavilanLogo';
 
 interface CalculationResult {
   alkalinity: number;
@@ -110,7 +110,11 @@ export default function PoolCalculator() {
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.headerIcon}>
-              <GavilanLogo size={48} color="#ffffff" />
+              <Image 
+                source={require('@/assets/images/gavilan-logo.png')} 
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
             </View>
             <Text style={styles.headerTitle}>Calculadora de Alcalinidad</Text>
             <Text style={styles.headerSubtitle}>FONTANERÍA GAVILÁN</Text>
@@ -259,6 +263,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
+    padding: 8,
+  },
+  logoImage: {
+    width: '100%',
+    height: '100%',
   },
   headerTitle: {
     fontSize: 24,
