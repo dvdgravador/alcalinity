@@ -127,7 +127,7 @@ export default function PoolCalculator() {
                 style={[styles.input, errors.tablets && styles.inputError]}
                 value={tablets}
                 onChangeText={setTablets}
-                placeholder="Cantidad de pastillas usadas"
+                placeholder="ingresa nº pastillas usadas"
                 keyboardType="numeric"
                 returnKeyType="next"
               />
@@ -163,7 +163,7 @@ export default function PoolCalculator() {
                 style={[styles.input, errors.poolVolume && styles.inputError]}
                 value={poolVolume}
                 onChangeText={setPoolVolume}
-                placeholder="Ingresa en metros cúbicos el volumen de la piscina"
+                placeholder="Metros cúbicos de la piscina"
                 keyboardType="numeric"
                 returnKeyType="done"
               />
