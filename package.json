@@ -1,0 +1,23 @@
+{
+  "name": "alkalinity-calculator",
+  "version": "1.0.0",
+  "description": "A simple alkalinity calculator for pool maintenance.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server",
+    "start": "live-server"
+  },
+  "keywords": [
+    "calculator",
+    "alkalinity",
+    "pool",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": "David Carrillo Tirado",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
