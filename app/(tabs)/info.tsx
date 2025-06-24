@@ -70,9 +70,9 @@ export default function InfoScreen() {
           <View style={styles.creditsContainer}>
             <View style={styles.logoContainer}>
               <Image 
-                source={require('@/assets/images/gavilan-logo.png')} 
+                source={{ uri: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2' }}
                 style={styles.logoImage}
-                resizeMode="contain"
+                resizeMode="cover"
               />
             </View>
             <Text style={styles.creditsText}>
@@ -208,15 +208,17 @@ const styles = StyleSheet.create({
   logoContainer: {
     backgroundColor: '#334155',
     borderRadius: 50,
-    padding: 20,
+    padding: 4,
     alignItems: 'center',
     justifyContent: 'center',
     width: 100,
     height: 100,
+    overflow: 'hidden',
   },
   logoImage: {
     width: '100%',
     height: '100%',
+    borderRadius: 46,
   },
   creditsText: {
     fontSize: 16,

@@ -111,9 +111,9 @@ export default function PoolCalculator() {
           <View style={styles.header}>
             <View style={styles.headerIcon}>
               <Image 
-                source={require('@/assets/images/gavilan-logo.png')} 
+                source={{ uri: 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2' }}
                 style={styles.logoImage}
-                resizeMode="contain"
+                resizeMode="cover"
               />
             </View>
             <Text style={styles.headerTitle}>Calculadora de Alcalinidad</Text>
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    padding: 8,
+    overflow: 'hidden',
   },
   logoImage: {
     width: '100%',
