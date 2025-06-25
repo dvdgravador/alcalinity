@@ -1,0 +1,45 @@
+{
+  "id": "calculadora-alcalinidad-fontaneria-gavilan",
+  "name": "Calculadora de Alcalinidad",
+  "short_name": "Alcalinidad",
+  "description": "Calculadora de alcalinidad para piscinas - Fontanería Gavilán",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "categories": [
+    "utilities",
+    "productivity"
+  ],
+  "lang": "es"
+}
