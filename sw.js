@@ -1,5 +1,4 @@
-// Service Worker para PWA - Versión mejorada
-const CACHE_NAME = 'alkalinity-calculator-v2';
+const CACHE_NAME = 'alcalinidad-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,95 +11,79 @@ const urlsToCache = [
   'https://unpkg.com/lucide@latest/dist/umd/lucide.js'
 ];
 
-// Instalar el service worker
-self.addEventListener('install', (event) => {
-  console.log('Service Worker: Installing...');
+// Instalación del Service Worker
+self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Service Worker: Caching files');
+      .then(cache => {
+        console.log('Cache abierto');
         return cache.addAll(urlsToCache);
-      })
-      .then(() => {
-        console.log('Service Worker: Installed successfully');
-        return self.skipWaiting();
-      })
-      .catch((error) => {
-        console.error('Service Worker: Installation failed', error);
       })
   );
 });
 
-// Activar el service worker
-self.addEventListener('activate', (event) => {
-  console.log('Service Worker: Activating...');
+// Activación del Service Worker
+self.addEventListener('activate', event => {
+  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Deleting old cache', cacheName);
+        cacheNames.map(cacheName => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            // Eliminar caches antiguos
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => {
-      console.log('Service Worker: Activated successfully');
-      return self.clients.claim();
     })
   );
 });
 
-// Interceptar las peticiones de red
-self.addEventListener('fetch', (event) => {
+// Estrategia de caché: Cache First, luego Network
+self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        // Si está en caché, devolver la versión cacheada
+      .then(response => {
+        // Devuelve la respuesta cacheada si existe
         if (response) {
-          console.log('Service Worker: Serving from cache', event.request.url);
           return response;
         }
         
-        // Si no, hacer la petición a la red
-        console.log('Service Worker: Fetching from network', event.request.url);
+        // Si no está en caché, hacemos la petición a la red
         return fetch(event.request)
-          .then((response) => {
-            // Verificar si la respuesta es válida
+          .then(response => {
+            // Verificamos que la respuesta sea válida
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
-
-            // Clonar la respuesta
+            
+            // Clonamos la respuesta para poder usarla y guardarla en caché
             const responseToCache = response.clone();
-
-            // Agregar al caché
+            
             caches.open(CACHE_NAME)
-              .then((cache) => {
+              .then(cache => {
+                // Guardamos la respuesta en caché
                 cache.put(event.request, responseToCache);
               });
-
+              
             return response;
           })
-          .catch((error) => {
-            console.error('Service Worker: Fetch failed', error);
-            // Devolver una respuesta offline si es necesario
-            if (event.request.destination === 'document') {
+          .catch(() => {
+            // Si falla la red y es una solicitud de página, devolvemos la página offline
+            if (event.request.mode === 'navigate') {
               return caches.match('/index.html');
             }
+            
+            // Para otros recursos, simplemente fallamos
+            return new Response('Sin conexión');
           });
       })
   );
 });
 
-// Manejar mensajes del cliente
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
+// Evento para actualizar el caché cuando hay una nueva versión
+self.addEventListener('message', event => {
+  if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
-});
-
-// Notificar al cliente sobre actualizaciones
-self.addEventListener('updatefound', () => {
-  console.log('Service Worker: Update found');
 });

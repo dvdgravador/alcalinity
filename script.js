@@ -1,12 +1,12 @@
 class AlkalinityCalculator {
     constructor() {
         this.sampleVolume = 50;
-        this.deferredPrompt = null;
         this.currentTab = 'calculator';
         this.initializeElements();
         this.bindEvents();
         this.initializeLucideIcons();
-        this.initializePWA();
+        this.initializeServiceWorker();
+        this.setupInstallPrompt();
     }
 
     initializeElements() {
@@ -21,11 +21,6 @@ class AlkalinityCalculator {
         this.tabButtons = document.querySelectorAll('.tab-button');
         this.tabContents = document.querySelectorAll('.tab-content');
         
-        // PWA elements
-        this.installBanner = document.getElementById('install-banner');
-        this.installBtn = document.getElementById('install-btn');
-        this.dismissBtn = document.getElementById('dismiss-btn');
-        
         // Result elements
         this.calculatedAlkalinity = document.getElementById('calculated-alkalinity');
         this.targetAlkalinity = document.getElementById('target-alkalinity');
@@ -36,6 +31,11 @@ class AlkalinityCalculator {
         // Error elements
         this.tabletsError = document.getElementById('tablets-error');
         this.poolVolumeError = document.getElementById('pool-volume-error');
+        
+        // Install banner
+        this.installBanner = document.getElementById('install-banner');
+        this.installBtn = document.getElementById('install-btn');
+        this.dismissBtn = document.getElementById('dismiss-btn');
     }
 
     bindEvents() {
@@ -51,14 +51,6 @@ class AlkalinityCalculator {
             button.addEventListener('click', (e) => this.handleTabChange(e));
         });
 
-        // PWA events
-        if (this.installBtn) {
-            this.installBtn.addEventListener('click', () => this.handleInstall());
-        }
-        if (this.dismissBtn) {
-            this.dismissBtn.addEventListener('click', () => this.dismissInstallBanner());
-        }
-
         // Clear errors on input
         this.tabletsInput.addEventListener('input', () => this.clearError('tablets'));
         this.poolVolumeInput.addEventListener('input', () => this.clearError('pool-volume'));
@@ -71,6 +63,76 @@ class AlkalinityCalculator {
         this.poolVolumeInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.handleCalculate();
         });
+        
+        // Install banner events
+        if (this.installBtn) {
+            this.installBtn.addEventListener('click', () => this.handleInstall());
+        }
+        
+        if (this.dismissBtn) {
+            this.dismissBtn.addEventListener('click', () => this.dismissInstallBanner());
+        }
+    }
+    
+    initializeServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Error al registrar el Service Worker:', error);
+                    });
+            });
+        }
+    }
+    
+    setupInstallPrompt() {
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevenir que Chrome muestre la instalación automáticamente
+            e.preventDefault();
+            // Guardar el evento para usarlo después
+            deferredPrompt = e;
+            // Mostrar el banner de instalación
+            if (this.installBanner) {
+                this.installBanner.style.display = 'block';
+            }
+        });
+        
+        // Función para manejar la instalación
+        this.handleInstall = () => {
+            if (!deferredPrompt) return;
+            
+            // Mostrar el prompt de instalación
+            deferredPrompt.prompt();
+            
+            // Esperar a que el usuario responda
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Usuario aceptó la instalación');
+                    this.dismissInstallBanner();
+                } else {
+                    console.log('Usuario rechazó la instalación');
+                }
+                // Limpiar el prompt guardado
+                deferredPrompt = null;
+            });
+        };
+        
+        // Ocultar el banner si la app ya está instalada
+        window.addEventListener('appinstalled', (e) => {
+            this.dismissInstallBanner();
+            console.log('Aplicación instalada');
+        });
+    }
+    
+    dismissInstallBanner() {
+        if (this.installBanner) {
+            this.installBanner.style.display = 'none';
+        }
     }
 
     handleTabChange(event) {
@@ -98,66 +160,6 @@ class AlkalinityCalculator {
         // Initialize Lucide icons after DOM is loaded
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
-        }
-    }
-
-    initializePWA() {
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('SW registered: ', registration);
-                })
-                .catch((registrationError) => {
-                    console.log('SW registration failed: ', registrationError);
-                });
-        }
-
-        // Listen for beforeinstallprompt event
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            this.deferredPrompt = e;
-            this.showInstallBanner();
-        });
-
-        // Listen for appinstalled event
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
-            this.dismissInstallBanner();
-        });
-
-        // Check if already installed
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('App is running in standalone mode');
-        }
-    }
-
-    showInstallBanner() {
-        if (this.installBanner && !localStorage.getItem('installBannerDismissed')) {
-            this.installBanner.style.display = 'block';
-            // Re-initialize icons for the banner
-            setTimeout(() => {
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
-            }, 100);
-        }
-    }
-
-    dismissInstallBanner() {
-        if (this.installBanner) {
-            this.installBanner.style.display = 'none';
-            localStorage.setItem('installBannerDismissed', 'true');
-        }
-    }
-
-    async handleInstall() {
-        if (this.deferredPrompt) {
-            this.deferredPrompt.prompt();
-            const { outcome } = await this.deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
-            this.deferredPrompt = null;
-            this.dismissInstallBanner();
         }
     }
 
