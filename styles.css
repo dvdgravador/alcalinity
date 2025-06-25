@@ -7,8 +7,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    color: #334155;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    color: #7f1d1d;
     line-height: 1.6;
     min-height: 100vh;
 }
@@ -21,25 +21,25 @@ body {
 
 /* Header styles */
 .header {
-    background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 50%, #ef4444 100%);
     padding: 32px 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
 }
 
 .header-icon {
     width: 80px;
     height: 80px;
     border-radius: 40px;
-    background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+    background: linear-gradient(135deg, #fecaca, #fca5a5);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
 }
 
 .header-icon i {
@@ -57,22 +57,22 @@ body {
 
 .header-subtitle {
     font-size: 16px;
-    color: #e9d5ff;
+    color: #fed7d7;
     font-weight: 600;
     margin-bottom: 4px;
 }
 
 .header-credit {
     font-size: 14px;
-    color: #ddd6fe;
+    color: #fecaca;
     font-style: italic;
 }
 
 /* Install Banner */
 .install-banner {
-    background: linear-gradient(135deg, #34d399, #10b981);
+    background: linear-gradient(135deg, #f87171, #ef4444);
     padding: 12px 20px;
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
 }
 
 .install-content {
@@ -99,7 +99,7 @@ body {
 
 .install-button {
     background-color: #ffffff;
-    color: #059669;
+    color: #dc2626;
     border: none;
     border-radius: 8px;
     padding: 8px 16px;
@@ -152,7 +152,7 @@ body {
     gap: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #64748b;
+    color: #991b1b;
     font-weight: 600;
     font-size: 16px;
 }
@@ -163,18 +163,18 @@ body {
 }
 
 .tab-button:hover {
-    background-color: #f1f5f9;
-    color: #475569;
+    background-color: #fef2f2;
+    color: #7f1d1d;
 }
 
 .tab-button.active {
-    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+    background: linear-gradient(135deg, #fca5a5, #f87171);
     color: #ffffff;
-    box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 2px 10px rgba(248, 113, 113, 0.3);
 }
 
 .tab-button.active:hover {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    background: linear-gradient(135deg, #f87171, #ef4444);
 }
 
 /* Main content */
@@ -199,18 +199,18 @@ body {
 
 /* Card styles */
 .card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
     margin: 20px 0;
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fecaca;
 }
 
 .card-title {
     font-size: 20px;
     font-weight: bold;
-    color: #1e293b;
+    color: #7f1d1d;
     margin-bottom: 20px;
 }
 
@@ -224,7 +224,7 @@ body {
 .card-header i {
     width: 24px;
     height: 24px;
-    color: #8b5cf6;
+    color: #f87171;
 }
 
 /* Input styles */
@@ -236,34 +236,34 @@ body {
     display: block;
     font-size: 16px;
     font-weight: 600;
-    color: #475569;
+    color: #991b1b;
     margin-bottom: 8px;
 }
 
 .input {
     width: 100%;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
     border-radius: 12px;
     padding: 16px;
     font-size: 16px;
-    color: #1e293b;
-    border: 2px solid #e2e8f0;
+    color: #7f1d1d;
+    border: 2px solid #fecaca;
     transition: all 0.2s ease;
 }
 
 .input:focus {
     outline: none;
-    border-color: #8b5cf6;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-}
-
-.input.error {
     border-color: #f87171;
     box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.1);
 }
 
+.input.error {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
 .input::placeholder {
-    color: #94a3b8;
+    color: #fca5a5;
 }
 
 /* Error styles */
@@ -277,11 +277,11 @@ body {
 .error-container i {
     width: 16px;
     height: 16px;
-    color: #f87171;
+    color: #dc2626;
 }
 
 .error-text {
-    color: #f87171;
+    color: #dc2626;
     font-size: 14px;
 }
 
@@ -293,11 +293,11 @@ body {
 
 .sample-button {
     flex: 1;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
     border-radius: 12px;
     padding: 16px;
-    border: 2px solid #e2e8f0;
-    color: #475569;
+    border: 2px solid #fecaca;
+    color: #991b1b;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -305,15 +305,15 @@ body {
 }
 
 .sample-button:hover {
-    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-    border-color: #cbd5e1;
+    background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+    border-color: #fca5a5;
 }
 
 .sample-button.active {
-    background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-    border-color: #8b5cf6;
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+    border-color: #f87171;
     color: #ffffff;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 15px rgba(248, 113, 113, 0.3);
 }
 
 /* Action buttons */
@@ -325,7 +325,7 @@ body {
 
 .calculate-button {
     flex: 2;
-    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
     border-radius: 12px;
     padding: 16px;
     border: none;
@@ -338,13 +338,13 @@ body {
     justify-content: center;
     gap: 8px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
 }
 
 .calculate-button:hover {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
 }
 
 .calculate-button i {
@@ -354,11 +354,11 @@ body {
 
 .reset-button {
     flex: 1;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
     border-radius: 12px;
     padding: 16px;
-    border: 2px solid #e2e8f0;
-    color: #475569;
+    border: 2px solid #fecaca;
+    color: #991b1b;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -366,8 +366,8 @@ body {
 }
 
 .reset-button:hover {
-    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-    border-color: #cbd5e1;
+    background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+    border-color: #fca5a5;
     transform: translateY(-1px);
 }
 
@@ -383,21 +383,21 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: linear-gradient(135deg, #fef2f2 0%, #fed7d7 100%);
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fecaca;
 }
 
 .result-label {
     font-size: 16px;
-    color: #475569;
+    color: #991b1b;
     font-weight: 500;
 }
 
 .result-value {
     font-size: 16px;
     font-weight: bold;
-    color: #1e293b;
+    color: #7f1d1d;
 }
 
 .result-value.warning {
@@ -410,35 +410,35 @@ body {
 
 .divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    background: linear-gradient(90deg, transparent, #fecaca, transparent);
     margin: 8px 0;
 }
 
 .recommendation-container {
-    background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+    background: linear-gradient(135deg, #fed7d7 0%, #fca5a5 100%);
     border-radius: 16px;
     padding: 20px;
     text-align: center;
-    border: 1px solid #c4b5fd;
+    border: 1px solid #fca5a5;
 }
 
 .recommendation-title {
     font-size: 18px;
     font-weight: bold;
-    color: #5b21b6;
+    color: #991b1b;
     margin-bottom: 8px;
 }
 
 .recommendation-value {
     font-size: 24px;
     font-weight: bold;
-    color: #7c3aed;
+    color: #dc2626;
     margin: 0;
 }
 
 .recommendation-note {
     font-size: 14px;
-    color: #6d28d9;
+    color: #b91c1c;
     margin-top: 8px;
 }
 
@@ -450,10 +450,10 @@ body {
 }
 
 .info-item {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: linear-gradient(135deg, #fef2f2 0%, #fed7d7 100%);
     border-radius: 16px;
     padding: 20px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fecaca;
 }
 
 .info-header {
@@ -466,33 +466,33 @@ body {
 .info-header i {
     width: 24px;
     height: 24px;
-    color: #8b5cf6;
+    color: #f87171;
 }
 
 .info-header h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #1e293b;
+    color: #7f1d1d;
     margin: 0;
 }
 
 .info-item h3 {
     font-size: 18px;
     font-weight: bold;
-    color: #1e293b;
+    color: #7f1d1d;
     margin-bottom: 12px;
 }
 
 .info-item h4 {
     font-size: 16px;
     font-weight: bold;
-    color: #1e293b;
+    color: #7f1d1d;
     margin-bottom: 12px;
 }
 
 .info-item p {
     font-size: 16px;
-    color: #475569;
+    color: #991b1b;
     line-height: 1.6;
     margin-bottom: 12px;
 }
@@ -502,11 +502,11 @@ body {
 }
 
 .level-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
     border-radius: 12px;
     padding: 16px;
     margin: 16px 0;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fecaca;
 }
 
 .level-row {
@@ -522,13 +522,13 @@ body {
 
 .level-label {
     font-size: 16px;
-    color: #475569;
+    color: #991b1b;
 }
 
 .level-value {
     font-size: 16px;
     font-weight: bold;
-    color: #8b5cf6;
+    color: #f87171;
 }
 
 .level-value-optimal {
@@ -538,11 +538,11 @@ body {
 }
 
 .dosage-info {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
     border-radius: 12px;
     padding: 16px;
     margin-top: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fecaca;
 }
 
 .dosage-info ul {
@@ -552,7 +552,7 @@ body {
 
 .dosage-info li {
     font-size: 14px;
-    color: #475569;
+    color: #991b1b;
     line-height: 1.5;
     margin-bottom: 4px;
     position: relative;
@@ -561,7 +561,7 @@ body {
 
 .dosage-info li::before {
     content: '•';
-    color: #8b5cf6;
+    color: #f87171;
     position: absolute;
     left: 0;
     font-weight: bold;
@@ -575,7 +575,7 @@ body {
 }
 
 .logo-container {
-    background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+    background: linear-gradient(135deg, #fed7d7 0%, #fca5a5 100%);
     border-radius: 50px;
     padding: 20px;
     display: flex;
@@ -583,24 +583,24 @@ body {
     justify-content: center;
     width: 100px;
     height: 100px;
-    border: 2px solid #c4b5fd;
+    border: 2px solid #fca5a5;
 }
 
 .logo-container i {
     width: 40px;
     height: 40px;
-    color: #7c3aed;
+    color: #dc2626;
 }
 
 .credits-text {
     font-size: 16px;
-    color: #475569;
+    color: #991b1b;
     text-align: center;
     line-height: 1.5;
 }
 
 .credits-highlight {
-    color: #8b5cf6;
+    color: #f87171;
     font-weight: bold;
 }
 
@@ -608,28 +608,28 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
     border-radius: 12px;
     padding: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #fecaca;
 }
 
 .company-container i {
     width: 20px;
     height: 20px;
-    color: #8b5cf6;
+    color: #f87171;
 }
 
 .company-text {
     font-size: 14px;
-    color: #475569;
+    color: #991b1b;
     text-align: center;
     line-height: 1.4;
     margin: 0;
 }
 
 .company-highlight {
-    color: #f87171;
+    color: #dc2626;
     font-weight: bold;
     font-size: 16px;
 }

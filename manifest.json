@@ -5,8 +5,8 @@
   "description": "Calculadora de alcalinidad para piscinas - Fontanería Gavilán",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#7c3aed",
+  "background_color": "#fef2f2",
+  "theme_color": "#ef4444",
   "orientation": "portrait",
   "icons": [
     {
